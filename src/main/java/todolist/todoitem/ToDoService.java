@@ -80,8 +80,9 @@ ToDoItem foundItem =maybeItem.get();
 //if(data.getDescription() != null) {
 //	foundItem.setDescription(data.getDescription().trim());
 //}
-
-System.out.println(foundItem.getStatus());
+Optional<Status> foundStatus = this.statusService.findById(data.getStatusId());
+foundItem.setStatus(foundStatus.get());
+data.setStatusId(null);
 
 mapper.map(data, foundItem);
 ToDoItem updated = this.repo.save(foundItem);
@@ -101,8 +102,6 @@ return Optional.of(updated);
 	
 
 }
-
-
 
 
 
